@@ -1,0 +1,141 @@
+import math
+
+def conv_rad_deg (rad):
+    return (rad * 180) / math.pi
+    
+def conv_deg_rad (deg):
+    return (deg * math.pi) / 180
+
+def origin (ref, point):
+    rad = math.atan ((point [1] - ref[1])/(point [0] - ref [0]))
+    y = point [1] - ref[1]
+    x = point [0] - ref [0]
+    R = math.sqrt ((point[1] - ref[1]) ** 2 + (point[0] - ref[0]) ** 2 )   
+    return [(x, y), R, conv_rad_deg (rad )]
+    
+
+space = {
+'A' : [0,0], 
+'B' : [2,4], 
+'C' : [-4,-2]
+}
+
+Q = {
+'A' : [20],
+'B' : [-30],
+'C' : [-10]
+}
+
+#we need a new list for space with wrt orgin_point_of_interest. done!
+ref_lst = { }
+
+#create new key
+key = list(space.keys())
+
+#that way i can reuse points (A,B) from dict into line (AB,AC)
+
+#test
+#print (origin(ref = space ['A'], point = space ['B']))
+
+ref_lst [str(key[0]+key[1])] = origin (ref = space['A'], point = space ['B']) 
+ref_lst [str(key[0]+key[2])] = origin (ref = space['A'], point = space ['C']) 
+
+# had a hard time trying to figure out why key2 is empty list. turn out i had this placed after the first key. (python process key2 before my function save it to ref_lst) anyway position of yr code does matter!
+key2 = list(ref_lst.keys())
+
+
+print (ref_lst)
+print (key2[0][0])
+print (Q[key2[0][0]])
+"""
+#might need to modify the list since the order of dict can change (suppose our point of ref is point D instead A . then we need to take re catogrize somehow..... it is going to be advanced for sure)
+def coulomb_law ():
+    k = 9 * 10**9
+    F_AB = ( k * Q[0] * Q[1] ) / (R_AB ** 2)
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+It show the reusablity of dic with reference to its list.
+#It works!!!
+ref = space ['A']
+print (ref[0])
+point = space ['B']
+print (point[0])
+"""
+
+"""
+update the dictonary to R with the new straight line
+hard coding
+R['R_AB'] = R_line (ref = space ['A'], point = space ['B'])
+R['R_AC'] = R_line (ref = space ['A'], point = space ['C'])
+"""
+
+"""
+interesting thing i pick up from web converting key and value of dictionay into list so that u can manipulate it.
+#key = list(space.keys())[1]
+#print (key)
+#value = list(space.values())[1][0]
+#print (value)
+'"""
+"""
+print (space ['B'][0])
+print (charge ['B'])
+
+R_AB = math.sqrt ((space ['B'][1] - space ['A'][1]) ** 2 
++ (space ['B'][0] - space ['A'][0]) ** 2 )
+
+R_AC = math.sqrt ((space ['C'][1] - space ['A'][1]) ** 2 
++ (space ['C'][0] - space ['A'][0]) ** 2 )
+
+print (R_AB)
+print (R_AC)
+
+   
+#print (conv_rad_deg (rad = 3 * math.pi))
+#print (conv_deg_rad (deg = 540))
+
+# here the angle is doable but the coding looks so complex.And i am repeating space, space space. Therefore i decided to simpify ref and point so that it is easier to recall the function. it is now call R_line
+#print (conv_rad_deg(deg=((space ['B'][1] - space ['A'][1])/(space ['B'][0] - space ['A'][0]))
+"""
+
+"""
+#Radius function is a beginning step i take. But later when i can combine with other fuction this becomes redundent. since i can collect
+everything under 1 function! Thanks Radius!!!
+def R_line (ref, point):
+    return math.sqrt ((point[1] - ref[1]) ** 2 + (point[0] - ref[0]) ** 2 )
+
+R = { }
+
+#quasi generalization
+R['R_'+key[0]+key[1]] = R_line (ref = space ['A'], point = space ['B'])
+R['R_'+key[0]+key[2]] = R_line (ref = space ['A'], point = space ['C'])
+
+print (R)
+"""
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
